@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_211249) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_165319) do
   create_table "artists", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -20,28 +20,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_211249) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "entry_id", null: false
+    t.integer "track_id", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["entry_id"], name: "index_comments_on_entry_id"
+    t.index ["track_id"], name: "index_comments_on_track_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "entries", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "artist_id", null: false
-    t.string "title", null: false
-    t.integer "bpm"
-    t.string "key"
-    t.integer "year", null: false
-    t.text "notes"
-    t.string "video_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_id"], name: "index_entries_on_artist_id"
-    t.index ["title"], name: "index_entries_on_title"
-    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "sample_segments", force: :cascade do |t|
@@ -53,13 +37,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_211249) do
   end
 
   create_table "samples", force: :cascade do |t|
-    t.integer "sampler_entry_id", null: false
-    t.integer "sampled_entry_id", null: false
+    t.integer "derived_track_id", null: false
+    t.integer "source_track_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sampled_entry_id"], name: "index_samples_on_sampled_entry_id"
-    t.index ["sampler_entry_id", "sampled_entry_id"], name: "index_samples_on_sampler_entry_id_and_sampled_entry_id", unique: true
-    t.index ["sampler_entry_id"], name: "index_samples_on_sampler_entry_id"
+    t.index ["derived_track_id", "source_track_id"], name: "index_samples_on_derived_track_id_and_source_track_id", unique: true
+    t.index ["derived_track_id"], name: "index_samples_on_derived_track_id"
+    t.index ["source_track_id"], name: "index_samples_on_source_track_id"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "artist_id", null: false
+    t.string "title", null: false
+    t.integer "bpm"
+    t.string "key"
+    t.integer "year", null: false
+    t.text "notes"
+    t.string "video_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_tracks_on_artist_id"
+    t.index ["title"], name: "index_tracks_on_title"
+    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,11 +71,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_211249) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "comments", "entries"
+  add_foreign_key "comments", "tracks"
   add_foreign_key "comments", "users"
-  add_foreign_key "entries", "artists"
-  add_foreign_key "entries", "users"
   add_foreign_key "sample_segments", "samples"
-  add_foreign_key "samples", "entries", column: "sampled_entry_id"
-  add_foreign_key "samples", "entries", column: "sampler_entry_id"
+  add_foreign_key "samples", "tracks", column: "derived_track_id"
+  add_foreign_key "samples", "tracks", column: "derived_track_id"
+  add_foreign_key "samples", "tracks", column: "source_track_id"
+  add_foreign_key "samples", "tracks", column: "source_track_id"
+  add_foreign_key "tracks", "artists"
+  add_foreign_key "tracks", "users"
 end
