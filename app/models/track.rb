@@ -1,30 +1,30 @@
-class Entry < ApplicationRecord
+class Track < ApplicationRecord
     belongs_to :user
     belongs_to :artist
 
     has_many :comments, dependent: :destroy
-    # if entry is deleted all comments are destroyed
+    # if track is deleted all comments are destroyed
 
-    # entry is the sampler (the connection)
+    # track is the sampler (the connection)
     has_many :samples_used,
              class_name: "Sample",
-             foreign_key: :sampler_entry_id,
+             foreign_key: :derived_track_id,
              dependent: :destroy
-    # entry is the sampler (the actual entry (song))
-    has_many :sampled_entries,
+    # track is the sampler (the actual track (song))
+    has_many :sampled_tracks,
              through: :samples_used,
-             source: :sampled_entry
+             source: :source_track
 
     # the inverse
-    # entry is being sampled, the samplee (the connection)
+    # track is being sampled, the samplee (the connection)
     has_many :sampled_by,
              class_name: "Sample",
-             foreign_key: :sampled_entry_id,
+             foreign_key: :source_track_id,
              dependent: :destroy
-    # entry is the samplee (the actual entry (song))
-    has_many :sampled_by_entries,
+    # track is the samplee (the actual track (song))
+    has_many :sampled_by_tracks,
              through: :sampled_by,
-             source: :sampler_entry
+             source: :derived_track
 
     validates :title, presence: true
     validates :year, presence: true
