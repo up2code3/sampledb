@@ -9,5 +9,4 @@ class User < ApplicationRecord
     def display_username
         "The username is #{username}"
     end
-
 end
