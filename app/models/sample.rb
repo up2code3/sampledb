@@ -1,6 +1,6 @@
 class Sample < ApplicationRecord
-    belongs_to :sampler_entry, class_name: "Entry"
-    belongs_to :sampled_entry, class_name: "Entry"
+    belongs_to :derived_track, class_name: "Track"
+    belongs_to :source_track, class_name: "Track"
 
     has_many :sample_segments, dependent: :destroy
 
