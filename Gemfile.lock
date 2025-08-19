@@ -312,6 +312,13 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
+    rubocop-rspec (3.6.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
+    rubocop-rspec_rails (2.31.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
+      rubocop-rspec (~> 3.5)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     simple_form (5.3.1)
@@ -404,8 +411,16 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.2)
   rails_db
+
   rspec-rails (~> 8.0.0)
+
+  rubocop
+  rubocop-performance
+  rubocop-rails
+
   rubocop-rails-omakase
+  rubocop-rspec
+  rubocop-rspec_rails
   solid_cable
   solid_cache
   solid_queue
