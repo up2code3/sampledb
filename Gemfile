@@ -66,7 +66,6 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rails-omakase", require: false
 
-
   gem "rspec-rails", "~> 8.0.0"
 end
 group :development do
@@ -77,5 +76,4 @@ group :development do
   gem "rubocop-performance", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
-
 end

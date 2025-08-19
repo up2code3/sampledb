@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   it 'returns the username' do
-    user = User.create(username: 'Tristan')
+    user = described_class.create(username: 'Tristan')
 
-    expect(user.username).to eq  'Tristan'
+    expect(user.username).to eq 'Tristan'
   end
 end
