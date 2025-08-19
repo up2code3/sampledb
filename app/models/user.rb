@@ -5,4 +5,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
+
+  def display_username
+    "The username is #{username}"
+  end
 end
