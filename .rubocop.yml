@@ -1,8 +1,30 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+#########################################
+#run rubocop for inspection 
+#run rubocop -A for aggresive enforcement 
+#run rubocop -a for safe enforcement 
+#########################################
+
+# cops are rules for style or best practice checks
+
+# auto enable new cops on release uodates
+AllCops:
+  NewCops: enable
+
+# idententation check (2 spaces is default)
+Layout/IndentationWidth:
+  Enabled: true
+
+# enforce consistent indentaiton inside modules
+Layout/IndentationConsistency:
+  Enabled: true
+
+# forbid extra empty lines
+Layout/EmptyLines:
+  Enabled: true
+
+# forbid spaces at the end of lines
+Layout/TrailingWhitespace:
+  Enabled: true
