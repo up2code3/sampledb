@@ -1,23 +1,29 @@
+# Load extensions (some funny business with require vs plugins and versions)
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
 # Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
 
 #########################################
-#run rubocop for inspection 
-#run rubocop -A for aggresive enforcement 
-#run rubocop -a for safe enforcement 
+# run rubocop        -> inspection 
+# run rubocop -A     -> aggressive enforcement 
+# run rubocop -a     -> safe enforcement 
 #########################################
 
-# cops are rules for style or best practice checks
-
-# auto enable new cops on release uodates
 AllCops:
-  NewCops: enable
+  NewCops: enable   # auto enable new cops on release updates
+  TargetRubyVersion: 3.2  # match your Ruby version
 
-# idententation check (2 spaces is default)
+# indentation check (2 spaces is default)
 Layout/IndentationWidth:
   Enabled: true
 
-# enforce consistent indentaiton inside modules
+# enforce consistent indentation inside modules/classes
 Layout/IndentationConsistency:
   Enabled: true
 
@@ -27,4 +33,8 @@ Layout/EmptyLines:
 
 # forbid spaces at the end of lines
 Layout/TrailingWhitespace:
+  Enabled: true
+
+# require exactly one final newline at end of each file
+Layout/TrailingEmptyLines:
   Enabled: true
