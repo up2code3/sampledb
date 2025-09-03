@@ -8,7 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-
 # Clear existing Data
 SampleSegment.delete_all
 Sample.delete_all
@@ -23,13 +22,12 @@ user_twhite = User.create!(
   username: "Twhite"
 )
 
-
-# create artist 
+# create artist
 artist_bob_james   = Artist.create!(name: "Bob James")
 artist_slick_rick  = Artist.create!(name: "Slick Rick")
 artist_ghostface   = Artist.create!(name: "Ghostface Killah")
 
-# create tracks 
+# create tracks
 track_nautilus = Track.create!(
   title: "Nautilus",
   year: 1974,
@@ -52,7 +50,7 @@ track_daytona_500 = Track.create!(
   user: user_twhite
 )
 
-# create samples 
+# create samples
 sample1 = Sample.create!(
   derived_track: track_childrens_story,
   source_track: track_nautilus
@@ -62,7 +60,7 @@ sample2 = Sample.create!(
   source_track: track_nautilus
 )
 
-# create sample segments 
+# create sample segments
 sample1.sample_segments.create!(start_time: 7)
 sample2.sample_segments.create!(start_time: 40)
 
@@ -84,7 +82,7 @@ Comment.create!(
 )
 
 # succes message
-puts "Seeded: 
+puts "Seeded:
  #{User.count} users,
  #{Artist.count} artists,
  #{Track.count} tracks,
