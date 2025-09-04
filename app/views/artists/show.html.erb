@@ -1,0 +1,11 @@
+<h1><%= @artist.name %></h1>
+
+<h2>Tracks</h2>
+<ul>
+  <% @artist.tracks.each do |track| %>
+    <li>
+      <%= link_to track.title, track_path(track) %> 
+      (<%= track.year %>)
+    </li>
+  <% end %>
+</ul>
