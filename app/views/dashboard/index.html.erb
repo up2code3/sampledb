@@ -1,0 +1,23 @@
+<h1>Dashboard</h1>
+
+<h2>Recent Tracks</h2>
+<ul>
+  <% @recent_tracks.each do |track| %>
+    <li>
+      <%= link_to track.title, track_path(track) %>
+      — <%= link_to track.artist.name, artist_path(track.artist) %>
+      (<%= track.year %>)
+    </li>
+  <% end %>
+</ul>
+
+<h2>Recent Comments</h2>
+<ul>
+  <% @recent_comments.each do |comment| %>
+    <li>
+      <%= comment.user.username %> on
+      <%= link_to comment.track.title, track_path(comment.track) %>:
+      "<%= comment.body %>"
+    </li>
+  <% end %>
+</ul>
