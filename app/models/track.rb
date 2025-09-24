@@ -1,5 +1,5 @@
 class Track < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :artist
 
   has_many :comments, dependent: :destroy
@@ -29,4 +29,5 @@ class Track < ApplicationRecord
   validates :title, presence: true
   validates :year, presence: true
   validates :bpm, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  
 end
