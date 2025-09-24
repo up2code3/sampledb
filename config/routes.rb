@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :artists, only: [:index, :show, :new, :create]
+  resources :artists, only: [ :index, :show, :new, :create ]
   resources :tracks,  only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
 
   get "/dashboard", to: "dashboard#index"
