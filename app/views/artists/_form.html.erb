@@ -1,0 +1,21 @@
+<%= form_with model: @artist do |form| %>
+    <% if @artist.errors.any? %>
+        <div class="error-messages">
+            <ul>
+                <% @artist.errors.full_messgaes.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    </div>
+
+    <div>
+    <%= form.submit %>
+    </div>
+
+    <% end %>

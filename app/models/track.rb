@@ -1,5 +1,5 @@
 class Track < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :artist
 
   has_many :comments, dependent: :destroy

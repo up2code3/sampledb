@@ -1,0 +1,48 @@
+<%= form_with model: @track do |form| %>
+  <% if @track.errors.any? %>
+    <div class="error-messages">
+      <h3><%= pluralize(@track.errors.count, "error") %> prohibited this track from being saved:</h3>
+      <ul>
+        <% @track.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :artist_id, "Artist" %><br>
+    <%= form.collection_select :artist_id, Artist.all, :id, :name, prompt: "Choose an artist" %>
+  </div>
+  <p>
+    <%= link_to "Add New Artist", new_artist_path %>
+  </p>
+  <div>
+    <%= form.label :year %><br>
+    <%= form.number_field :year %>
+  </div>
+
+  <div>
+    <%= form.label :bpm %><br>
+    <%= form.number_field :bpm %>
+  </div>
+
+  <div>
+    <%= form.label :key %><br>
+    <%= form.text_field :key %>
+  </div>
+
+  <div>
+    <%= form.label :notes %><br>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
