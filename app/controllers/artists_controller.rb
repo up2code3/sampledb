@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
   def index
-    @artists = Artist.all
+    @artists = Artist.alphabetical
   end
 
   def show
@@ -14,7 +14,7 @@ class ArtistsController < ApplicationController
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
-      redirect_to @artist, notice: "Artist Created"
+      redirect_to new_track_path(artist_id: @artist.id), notice: "Artist Created"
     else
       render :new, status: :unprocessable_entity
     end

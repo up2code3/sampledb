@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :artist_id, "Artist" %><br>
-    <%= form.collection_select :artist_id, Artist.all, :id, :name, prompt: "Choose an artist" %>
+    <%= form.collection_select :artist_id, @artists, :id, :name, prompt: "Choose an artist" %>
   </div>
   <p>
     <%= link_to "Add New Artist", new_artist_path %>

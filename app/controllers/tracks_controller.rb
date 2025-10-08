@@ -1,4 +1,5 @@
 class TracksController < ApplicationController
+  before_action :require_admin, only: [ :destroy ]
   def index
     @tracks = Track.all
   end
@@ -9,6 +10,10 @@ class TracksController < ApplicationController
 
   def new
     @track = Track.new
+    @artists = Artist.alphabetical
+    if params[:artist_id].present?
+      @track.artist_id = params[:artist_id]
+    end
   end
 
   def create

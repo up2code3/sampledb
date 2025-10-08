@@ -11,7 +11,7 @@
   <ul>
     <% @track.sampled_tracks.each do |source| %>
       <li><%= link_to source.title, track_path(source) %> - 
-      <%= link_to source.artist.name, artist_path(source) %></li>
+      <%= link_to source.artist.name, artist_path(source.artist) %></li>
     <% end %>
   </ul>
 <% else %>
@@ -24,7 +24,7 @@
   <ul>
     <% @track.sampled_by_tracks.each do |derived| %>
       <li><%= link_to derived.title, track_path(derived) %> - 
-      <%= link_to derived.artist.name, artist_path(derived) %></li>
+      <%= link_to derived.artist.name, artist_path(derived.artist) %></li>
     <% end %>
   </ul>
 <% else %>
