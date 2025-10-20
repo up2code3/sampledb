@@ -7,22 +7,30 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-
 # Clear existing Data
-SampleSegment.delete_all
-Sample.delete_all
-Comment.delete_all
-Track.delete_all
-Artist.delete_all
-User.delete_all
+[ SampleSegment, Sample, Comment, Track, Artist, User ].each do |model|
+  model.destroy_all
+  ActiveRecord::Base.connection.reset_sequence!(model.table_name, model.primary_key)
+end
 
-# create user
-user_twhite = User.create!(
+# create users
+user_admin = User.create!(
   email: "Twhite@mail.com",
-  username: "Twhite"
+  username: "Twhite",
+  password: "password123",
+  password_confirmation: "password123",
+  role: "admin"
 )
 
-# create artist
+user_regular = User.create!(
+  email: "user@mail.com",
+  username: "RegularJoe",
+  password: "userpassword",
+  password_confirmation: "userpassword",
+  role: "user"
+)
+
+# create artists
 artist_bob_james   = Artist.create!(name: "Bob James")
 artist_slick_rick  = Artist.create!(name: "Slick Rick")
 artist_ghostface   = Artist.create!(name: "Ghostface Killah")
@@ -33,21 +41,21 @@ track_nautilus = Track.create!(
   year: 1974,
   bpm: 99,
   artist: artist_bob_james,
-  user: user_twhite
+  user: user_admin
 )
 track_childrens_story = Track.create!(
   title: "Children’s Story",
   year: 1988,
   bpm: 103,
   artist: artist_slick_rick,
-  user: user_twhite
+  user: user_admin
 )
 track_daytona_500 = Track.create!(
   title: "Daytona 500",
   year: 1996,
   bpm: 98,
   artist: artist_ghostface,
-  user: user_twhite
+  user: user_admin
 )
 
 # create samples
@@ -67,21 +75,21 @@ sample2.sample_segments.create!(start_time: 40)
 # create comments
 Comment.create!(
   body: "did rza produce daytona 500",
-  user: user_twhite,
+  user: user_admin,
   track: track_daytona_500
 )
 Comment.create!(
   body: "who was slick ricks producer",
-  user: user_twhite,
+  user: user_admin,
   track: track_childrens_story
 )
 Comment.create!(
   body: "intersting that slick ricks version is faster than the original",
-  user: user_twhite,
+  user: user_admin,
   track: track_childrens_story
 )
 
-# succes message
+# success message
 puts "Seeded:
  #{User.count} users,
  #{Artist.count} artists,
