@@ -4,6 +4,27 @@ class Sample < ApplicationRecord
 
   has_many :sample_segments, dependent: :destroy
 
-  # TODO Validate later sampler_entry_id can not be equal sampled_entry_id
-  # AKA a song can not sample itself or be sampled by itself
+  validates :derived_track_id, presence: true
+  validates :source_track_id,  presence: true
+  validate  :no_self_sampling
+  validate  :no_sampling_from_future
+
+  # a source id cannot be equal to a derived id on sample join table
+  def no_self_sampling
+    if derived_track_id == source_track_id
+      errors.add(:base, "A track cannot sample itself")
+    end
+  end
+
+  # check sourceYear exist, derivedYear exist, then if derived is less than source throw error
+  def no_sampling_from_future
+    if source_track&.year && derived_track&.year && derived_track&.year < source_track&.year
+      errors.add(:base, "A track cannot sample from the future")
+    end
+  end
+
+  # behavior methods
+  def description
+    "#{derived_track.title} samples #{source_track.title}"
+  end
 end

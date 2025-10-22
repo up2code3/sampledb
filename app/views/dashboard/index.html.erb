@@ -1,4 +1,9 @@
-<h1>Dashboard</h1>
+
+<% if flash[:alert] %>
+  <div style="color:red; text-align:center; margin-bottom: 20px;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
 <h2>Recent Tracks</h2>
 <ul>
@@ -22,6 +27,13 @@
   <% end %>
 </ul>
 
-<p>
- <%= link_to "Add New Track", new_track_path %>
-</p>
+<div style="text-align:left; margin-top: 20px;">
+  <%= link_to "Add New Track", new_track_path,
+      style: "padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;" %>
+
+  <%= link_to "Add New Sample Connection", new_sample_path,
+      style: "padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;" %>
+
+  <%= link_to "View All Tracks", tracks_path,
+      style: "padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px;" %>
+</div>

@@ -1,45 +1,68 @@
-<h1>Track: <%= @track.title %></h1>
+<h1><%= @track.formatted_title %></h1>
+
 <p>
-  Artist: <%= @track.artist.name %><br>
-  Year: <%= @track.year %><br>
-  BPM: <%= @track.bpm %>
+  <strong>Artist:</strong> <%= link_to @track.artist.name, artist_path(@track.artist) %><br>
+  <strong>Added by:</strong> <%= @track.user.username %><br>
+  <strong>BPM:</strong> <%= @track.bpm || "N/A" %><br>
+  <strong>KEY:</strong> <%= @track.key || "N/A" %><br>
+  <strong>Samples used:</strong> <%= @track.sample_count %><br>
+  <strong>Sampled by others:</strong> <%= @track.sampled_by_count %>
+  
 </p>
 
-<h2>Samples Used</h2>
+<hr>
 
+<h2>Samples Used</h2>
 <% if @track.sampled_tracks.any? %>
   <ul>
     <% @track.sampled_tracks.each do |source| %>
-      <li><%= link_to source.title, track_path(source) %> - 
-      <%= link_to source.artist.name, artist_path(source.artist) %></li>
+      <li>
+        <%= link_to source.formatted_title, track_path(source) %> —
+        <%= link_to source.artist.name, artist_path(source.artist) %>
+      </li>
     <% end %>
   </ul>
 <% else %>
   <p>None</p>
-<% end %>   
+<% end %>
+
+<hr>
 
 <h2>Sampled By</h2>
-
 <% if @track.sampled_by_tracks.any? %>
   <ul>
     <% @track.sampled_by_tracks.each do |derived| %>
-      <li><%= link_to derived.title, track_path(derived) %> - 
-      <%= link_to derived.artist.name, artist_path(derived.artist) %></li>
+      <li>
+        <%= link_to derived.formatted_title, track_path(derived) %> —
+        <%= link_to derived.artist.name, artist_path(derived.artist) %>
+      </li>
     <% end %>
   </ul>
 <% else %>
   <p>None</p>
-<% end %>    
+<% end %>
+
+<hr>
 
 <h2>Comments</h2>
-<ul>
-  <% @track.comments.each do |comment| %>
-    <li><%= comment.user.username %>: <%= comment.body %></li>
-  <% end %>
-</ul>
+<% if @track.comments.any? %>
+  <ul>
+    <% @track.comments.each do |comment| %>
+      <li><%= comment.user.username %>: <%= comment.body %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>
 
-<p>
-  <%= link_to "Edit Track", edit_track_path(@track) %> |
-  <%= link_to "Delete Track", track_path(@track),
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this track?" } %>
-</p>
+<hr>
+
+<% if logged_in? %>
+  <p>
+    <%= link_to "Edit Track", edit_track_path(@track) %> |
+    <% if current_user.role == "admin" %>
+      <%= link_to "Delete Track", track_path(@track),
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </p>
+<% end %>
