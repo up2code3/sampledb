@@ -1,7 +1,7 @@
 class Artist < ApplicationRecord
   has_many :tracks, dependent: :destroy
-
-  validates :name, presence: true
+  
+  validates :name, presence: true, uniqueness: true
 
   # alpha scope
   scope :alphabetical, -> { order("LOWER(name) ASC") }

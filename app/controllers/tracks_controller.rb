@@ -18,24 +18,28 @@ class TracksController < ApplicationController
 
   def create
     @track = Track.new(track_params)
-    @track.user = User.find_by(username: "Twhite")
+    @track.user = current_user
+
     if @track.save
       redirect_to @track, notice: "Track Created!"
     else
+      @artists = Artist.alphabetical 
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @track = Track.find(params[:id])
-  end
+def edit
+  @track = Track.find(params[:id])
+  @artists = Artist.alphabetical
+end
 
   def update
     @track = Track.find(params[:id])
-    @track.user = User.find_by(username: "Twhite")
+    @track.user = current_user
     if @track.update(track_params)
       redirect_to @track, notice: "Track Updated"
     else
+      @artists = Artist.alphabetical
       render :edit, status: :unprocessable_entity
     end
   end

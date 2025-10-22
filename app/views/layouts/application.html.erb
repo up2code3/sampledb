@@ -22,21 +22,31 @@
     <%= javascript_importmap_tags %>
   </head>
 
- <body>
-  <% if flash[:notice] %>
-    <p class="notice"><%= flash[:notice] %></p>
-  <% end %>
+<body>
+  <header>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+      <!-- Left: Login / Logout -->
+      <div>
+        <% if logged_in? %>
+          <%= button_to "Logout", logout_path, method: :delete %>
+        <% else %>
+          <%= link_to "Login", login_path %>
+        <% end %>
+      </div>
 
-  <% if flash[:alert] %>
-    <p class="alert"><%= flash[:alert] %></p>
-  <% end %>
+      <!-- Center: Logged in as ... -->
+      <div>
+        <% if logged_in? %>
+          <p>Logged in as <%= current_user.username %></p>
+        <% end %>
+      </div>
 
-    <% if logged_in? %>
-    <p>Logged in as <%= current_user.username %></p>
-    <%= button_to "Logout", logout_path, method: :delete %>
-  <% else %>
-    <%= link_to "Login", login_path %>
-  <% end %>
+      <!-- Right: Dashboard -->
+      <div>
+        <%= link_to "Dashboard", dashboard_path %>
+      </div>
+    </div>
+  </header>
 
   <%= yield %>
 </body>

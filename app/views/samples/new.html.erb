@@ -1,0 +1,27 @@
+<h1>Add Sample Connection</h1>
+
+<%= form_with model: @sample, local: true do |f| %>
+  <% if @sample.errors.any? %>
+    <div style="color:red;">
+      <ul>
+        <% @sample.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+    <div>
+      <%= f.label :derived_track_id, "New Track" %><br>
+      <%= f.collection_select :derived_track_id, @tracks, :id, :title, prompt: "Select sampler" %>
+    </div>
+
+    <div>
+      <%= f.label :source_track_id, "Original Source" %><br>
+      <%= f.collection_select :source_track_id, @tracks, :id, :title, prompt: "Select sampled track" %>
+    </div>
+  </div>
+
+  <%= f.submit "Create Sample Connection" %>
+<% end %>

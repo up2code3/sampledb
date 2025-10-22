@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     def require_admin
       unless current_user&.role == "admin"
         flash[:alert] = "You do not have permission to do that."
-        redirect_to root_path
+        redirect_to dashboard_path
       end
     end
 
