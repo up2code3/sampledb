@@ -8,10 +8,10 @@ class DashboardController < ApplicationController
 
   private
 
-  def require_login
-    unless logged_in?
-      flash[:alert] = "Please log in to access the dashboard"
-      redirect_to login_path
+    def require_login
+      unless logged_in?
+        flash[:alert] = "Please log in to access the dashboard"
+        redirect_to login_path
+      end
     end
-  end
 end

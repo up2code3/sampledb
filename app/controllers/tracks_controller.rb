@@ -23,15 +23,15 @@ class TracksController < ApplicationController
     if @track.save
       redirect_to @track, notice: "Track Created!"
     else
-      @artists = Artist.alphabetical 
+      @artists = Artist.alphabetical
       render :new, status: :unprocessable_entity
     end
   end
 
-def edit
-  @track = Track.find(params[:id])
-  @artists = Artist.alphabetical
-end
+  def edit
+    @track = Track.find(params[:id])
+    @artists = Artist.alphabetical
+  end
 
   def update
     @track = Track.find(params[:id])

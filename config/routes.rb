@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get "home/index"
   resources :artists, only: [ :index, :show, :new, :create ]
   resources :tracks,  only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
-  resources :samples, only: [:new, :create]
-  
+  resources :samples, only: [ :new, :create ]
+
   get "/dashboard", to: "dashboard#index"
   get "signup", to: "users#new"
   post "signup", to: "users#create"

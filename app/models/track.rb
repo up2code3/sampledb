@@ -30,20 +30,17 @@ class Track < ApplicationRecord
   validates :year, numericality: { greater_than_or_equal_to: 1900, less_than_or_equal_to: Date.current.year }
   validates :bpm, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
+  # behavior methods
 
-  #behavior methods
-
-    def formatted_title
+  def formatted_title
     "#{title} (#{year})"
-  end
+end
 
   def sample_count
     samples_used.count
   end
-  
-  def sampled_by_count
-  sampled_by_tracks.count
-end
 
-  
+  def sampled_by_count
+    sampled_by_tracks.count
+end
 end

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :tracks
-  #future nullify user id on orphaned tracks?
+  # future nullify user id on orphaned tracks?
   has_many :comments,  dependent: :destroy
 
   has_secure_password
