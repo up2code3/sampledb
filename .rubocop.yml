@@ -38,3 +38,6 @@ Layout/TrailingWhitespace:
 # require exactly one final newline at end of each file
 Layout/TrailingEmptyLines:
   Enabled: true
+
+RSpec/MultipleExpectations:
+  Max: 2
