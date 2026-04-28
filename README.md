@@ -1,3 +1,30 @@
+This is essentially a record database inspired by WhoSampled, It shows connections based on artists who have sampled other artists, and vice versa 
+
+Note: Runs on Ruby on Rails on Ubuntu (WSL) 
+
+Terminal Commands
+
+Open Project
+cd ~/repos/sampledb (navigate to directory) 
+code . (Opens current folder in VSCode)
+
+Install Dependencies (First time only)
+bundle install (installs dependencies) 
+
+Create Database (First time only)
+bin/rails db:create (creates the database itself)
+bin/rails db:migrate (migrates all the tables, columns, and relationships)
+bin/rails db:seed (adds data to the database, artist, songs, connections)
+
+Start the Server
+bin/rails s (spins the up rails, app is now running)
+
+Open Browser
+Open browser (Rails listens on http://localhost:3000)
+
+Stop Server
+Ctrl C (Shut down and exits from terminal)
+
 ## Tables and Models
 
 ```
