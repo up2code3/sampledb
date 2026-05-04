@@ -25,6 +25,12 @@ Open browser (Rails listens on http://localhost:3000)
 Stop Server
 Ctrl C (Shut down and exits from terminal)
 
+## Note 
+All users can view connections and data,
+to comment 
+or create entries, 
+user must be logged in.
+
 ## Tables and Models
 
 ```
